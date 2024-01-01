@@ -25,6 +25,8 @@
  .header {
     background-color: #3333CC;
     height: 90px;
+    display: flex;
+
  
 
   }
@@ -32,6 +34,27 @@
   .header_logo{
     padding-top:20px
   }
+
+  .header-menus {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 900px;
+    
+  }
+
+  .header-menus li {
+    
+    margin-top: 30px;
+   }
+
+   .btn{
+    color: #fff;
+    background-color: #eb6100;
+    height: fit-content;
+
+   }
+      
 
 
 
