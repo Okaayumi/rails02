@@ -13,3 +13,84 @@
  *= require_tree .
  *= require_self
  */
+ * {
+    margin:0;
+    padding:0;
+    }
+
+ body {
+    margin: 0 auto;
+    }
+
+ .header {
+    background-color: #3333CC;
+    height: 90px;
+ 
+
+  }
+
+  .header_logo{
+    padding-top:20px
+  }
+
+
+
+  .Firstview{
+    background-image:url(/cover-lg.jpg );
+    height: 700px;
+
+  }
+
+.Firstviewtitle{
+    text-align: center;
+    padding:80px 0;
+}
+.recomend_area{
+    background-size:cover ;
+    background-position: 50%;
+    height: 455px;
+    width:25%;
+    float: left;
+    position:relative;
+}
+
+
+.recomend_tokyo{
+    background-image:url(/tokyo.jpg );
+
+
+    
+}
+
+.recomend_osaka{
+    background-image:url(/osaka.jpg );
+
+
+    
+}
+
+.recomend_kyoto{
+    background-image:url(/kyoto.jpeg );
+
+    
+    
+}
+
+.recomend_sapporo{
+    background-image:url(/sapporo.jpg );
+
+ 
+    
+}
+
+.area{
+    position: absolute;
+    bottom:0;
+    right: 0;
+    color:white;
+}
+.footer {
+    background-color: #3333CC;
+    height: 465px;
+    padding-top:60px
+  }
