@@ -19,9 +19,15 @@
           <li>
             <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
           </li>
-          <li>
-          <%= current_user.id %>
-          </li>
+          <div class="dropdown">
+          <li onclick="toggleDropdown()"><%= current_user.name %></li>
+          <ul id="dropdownContent" class="dropdown-content">
+            
+            <li><%= link_to("アカウント設定","/users/account")%></li>
+            <li><a href="#">メニュー項目2</a></li>
+           
+          </ul>
+        </div>
       <% else %>
         <li>
           <%= link_to "ログイン", new_user_session_path %>
@@ -38,8 +44,27 @@
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
+    
+
+    
 
     <div class="footer">
       <div class="footer_logo"><img src="/logo.png" alt="サイトロゴ" width="322" height="43"></div>
+
+      <script>
+  function toggleDropdown() {
+    var dropdownContent = document.getElementById("dropdownContent");
+    dropdownContent.style.display = (dropdownContent.style.display === 'block') ? 'none' : 'block';
+  }
+
+  // ドキュメント外をクリックした場合にドロップダウンを非表示にする
+  window.onclick = function(event) {
+    var dropdown = document.querySelector('.dropdown');
+    if (!event.target.matches('.dropdown li') && !event.target.matches('.dropdown-content')) {
+      var dropdownContent = document.getElementById("dropdownContent");
+      dropdownContent.style.display = 'none';
+    }
+  }
+</script>
   </body>
 </html>
