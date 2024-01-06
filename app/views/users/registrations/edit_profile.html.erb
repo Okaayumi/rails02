@@ -1,0 +1,28 @@
+<%= render 'shared/account' %>
+
+
+<div class="profile-image">
+  <% if @image_name.present? %>
+    <%= image_tag @image_name, size: '80x80' %>
+  <% else %>
+    <%= image_tag 'avatar.png', size: '80x80' %>
+  <% end %>
+</div>
+
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f| %>
+  <!-- 既存のフォームフィールド -->
+
+  <!-- プロフィール画像のアップロードボタン -->
+  <div class="field">
+    <%= f.label :image_name %>
+    <%= f.file_field :image_name %>
+  </div>
+
+  <%= f.submit '更新' %>
+<% end %>
+
+
+
+
+

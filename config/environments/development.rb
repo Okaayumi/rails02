@@ -76,4 +76,5 @@ Rails.application.configure do
 
   # デバイスのメール設定
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.i18n.default_locale = :ja
 end

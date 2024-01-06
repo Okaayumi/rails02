@@ -3,7 +3,58 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
-  
+  before_action :authenticate_user! 
+    #ユーザーが認証澄香どうか
+
+  def edit_profile
+
+    @user = current_user
+    @image_name = @user.image_name.present? ? @user.image_name : 'avatar.png'
+
+    render 'edit_profile'
+   
+  end
+
+  def update
+    super do |resource|
+
+      if params[:user].present? && params[:user][:image_name].present?
+        resource.update(user_params)
+        
+
+      end
+    end
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:image_name)
+
+  end
+
+  protected
+
+  def after_update_path_for(resource)
+    user_profile_path
+  end
+  #def edit_email
+    # メール変更画面の表示
+    #render 'devise/edit_email'# deviseフォルダ内のedit_email.html.erbを表
+  #end
+
+ # def update_email
+    # メールの更新処理
+ # end
+
+ # def edit_password
+    # パスワード変更画面の表示
+ # end
+
+ # def update_password
+    # パスワードの更新処理
+#  end
+
 
   # GET /resource/sign_up
   def new

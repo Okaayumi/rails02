@@ -1,0 +1,20 @@
+
+<%= render 'shared/account' %>
+<%= form_for(resource, as: resource_name, url: user_registration_path, method: :put) do |f| %>
+  <!-- メールアドレス変更用のフィールド -->
+  <%= f.label :email, 'メールアドレス' %>
+  <%= f.email_field :email, autofocus: true %>
+
+  <!-- パスワード変更用のフィールド -->
+  <%= f.label :password, '新しいパスワード' %>
+  <%= f.password_field :password, autocomplete: "off" %>
+
+  <%= f.label :password_confirmation, '新しいパスワード（確認用）' %>
+  <%= f.password_field :password_confirmation, autocomplete: "off" %>
+
+  <%= f.label :current_password, '現在のパスワード' %>
+  <%= f.password_field :current_password, autocomplete: "off" %>
+
+  <%= f.submit '保存する' %>
+  <%= link_to("キャンセル","/users/account")%>
+<% end %>
