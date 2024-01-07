@@ -15,29 +15,30 @@ class Users::RegistrationsController < Devise::RegistrationsController
    
   end
 
-  def update
-    super do |resource|
+  #def update
+    #super do |resource|
 
-      if params[:user].present? && params[:user][:image_name].present?
-        resource.update(user_params)
+      #if params[:user].present? && params[:user][:image_name].present?
+        #resource.update(user_params)
         
 
-      end
-    end
-  end
+      #end
+    #end
+  #end
 
-  private
+  #private
 
-  def user_params
-    params.require(:user).permit(:image_name)
+  #def user_params
+    #params.require(:user).permit(:image_name)
 
-  end
+  #end
 
-  protected
+  #protected
 
-  def after_update_path_for(resource)
-    user_profile_path
-  end
+  #def after_update_path_for(resource)
+    #user_profile_path
+  #end
+  #上記はコメント中
   #def edit_email
     # メール変更画面の表示
     #render 'devise/edit_email'# deviseフォルダ内のedit_email.html.erbを表
@@ -57,13 +58,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
 
   # GET /resource/sign_up
-  def new
- 
-    @user = User.new
+  #def new
+  
+  #  super
     
-    
-     super
-   end
+  # end
 
   # POST /resource
   # def create

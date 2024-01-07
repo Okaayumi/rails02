@@ -9,6 +9,7 @@ devise_scope :user do
   root 'home#top'
   get 'users/profile', to: 'users#profile', as: 'user_profile'
   get 'users/account', to: 'users#account', as: 'user_acount'
+  put '/users/:id/update', to: 'users#update', as: 'update_user'
 
   resource :reservations
 
@@ -16,6 +17,8 @@ devise_scope :user do
     get 'users/edit', to: 'users#edit'
     put 'update', to: 'registrations#update_email'
   end
+
+  
  
 
 
