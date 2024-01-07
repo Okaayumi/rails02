@@ -5,17 +5,21 @@ Rails.application.routes.draw do
   }
 devise_scope :user do
     get '/users/profile/edit', to: 'users/registrations#edit_profile', as: 'edit_user_profile'
+    put '/users/profile/edit', to: 'users#update_profile' 
+    patch '/users/profile/edit', to: 'users#update_profile'
+
   end
   root 'home#top'
   get 'users/profile', to: 'users#profile', as: 'user_profile'
   get 'users/account', to: 'users#account', as: 'user_acount'
   put '/users/:id/update', to: 'users#update', as: 'update_user'
 
+
   resource :reservations
 
   namespace :users do
     get 'users/edit', to: 'users#edit'
-    put 'update', to: 'registrations#update_email'
+    put 'update', to: 'registrations#update'
   end
 
   

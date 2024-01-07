@@ -10,16 +10,26 @@
 </div>
 
 
-<%= form_with(model: @user, url: update_user_path(@user), method: :put, local: true, multipart: true) do |form| %>
+<%= form_with model: @user, url: edit_user_profile_path(@user), method: :patch, local: true, multipart: true do |f| %>
   <!-- 既存のフォームフィールド -->
 
   <!-- プロフィール画像のアップロードボタン -->
   <div class="field">
-    <%= form.label :image_name, '画像のアップロード' %>
-    <%= form.file_field :image_name %>
+    <%= f.label :image_name, '画像のアップロード' %>
+    <%= f.file_field :image_name %>
   </div>
 
-  <%= form.submit '更新' %>
+  <!--名前-->
+  <tr>
+  <h><%= f.label :name ,"名前" %></h>
+  <%= f.text_field :name %>
+</tr>
+
+  <!-- 自己紹介フィールド -->
+  <h><%= f.label :self_introduction ,"一言紹介" %></h>
+  <td><%= f.text_area :self_introduction %></td>
+
+  <%= f.submit '更新' %>
 <% end %>
 
 
