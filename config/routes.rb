@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations:  'users/registrations'
   }
-  devise_scope :user do
+devise_scope :user do
     get '/users/profile/edit', to: 'users/registrations#edit_profile', as: 'edit_user_profile'
   end
   root 'home#top'
