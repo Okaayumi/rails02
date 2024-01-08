@@ -22,21 +22,22 @@ class UsersController < ApplicationController
     end
 
     def update_profile
-      @user = User.find(params[:id])
+      @user = current_user #find(params[:id])の代わり
     
-      if @user.update(params.require(:user).permit(:name, :image_name,:self_introduction))
-
-        flash[:notice] = "ユーザーIDが「#{@user.id}」の情報を更新しました"
-        redirect_to users_profile_path
+      if @user.update(user_params)
+        # 更新が成功した場合の処理
+        flash[:notice] = "ユーザーIDが「#{current_user.id}」の情報を更新しました"
+        redirect_to user_profile_url
+        # 更新が失敗した場合の処理
       else
-        render "edit/profile"
+        render "edit"
       end
     end
     
     private
     
     def user_params
-      params.require(:user).permit(:name, :self_introduction, :image_name)
+      params.require(:user).permit(:name, :image_name, :self_introduction)
     end
      
 

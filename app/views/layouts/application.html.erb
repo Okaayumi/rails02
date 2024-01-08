@@ -16,15 +16,13 @@
       <ul class="header-menus">
       <% if user_signed_in? %>
 
-          <li>
-            <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-          </li>
+
           <div class="dropdown">
           <li onclick="toggleDropdown()"><%= current_user.name %></li>
           <ul id="dropdownContent" class="dropdown-content">
             
             <li><%= link_to("アカウント設定","/users/account")%></li>
-            <li><a href="#">メニュー項目2</a></li>
+            <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
            
           </ul>
         </div>
