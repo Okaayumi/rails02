@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'rooms/index'
   # ログイン、アカウント編集後、任意のページに推移させるための記述
   devise_for :users, controllers: {
     registrations:  'users/registrations'
@@ -14,13 +15,16 @@ devise_scope :user do
   get 'users/account', to: 'users#account', as: 'user_acount'
   put '/users/:id/update', to: 'users#update', as: 'update_user'
 
-
+#newからdeleteまでのルーテイングを一括で作っているっぽい
   resource :reservations
-
+  resources :users
+  resources :rooms
   namespace :users do
     get 'users/edit', to: 'users#edit'
     put 'update', to: 'registrations#update'
   end
+
+
 
   
  
