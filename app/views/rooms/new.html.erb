@@ -23,6 +23,12 @@
     <th><%=f.label :adress,"住所"%></th>
     <td><%=f.text_field :adress%></td>
     </tr>
+    
+    <tr>
+    <th><%= f.label :image_room,"画像" %></th>
+    <th><%= f.file_field :image_room %></th>
+    </tr>
+
 
   </table>
   <%= f.hidden_field :room_id, value: @room.id %>

@@ -1,5 +1,6 @@
 class RoomsController < ApplicationController
   def index
+    @rooms=Room.all
   end
 
   def new
@@ -9,8 +10,9 @@ class RoomsController < ApplicationController
 
   def create #データベースに保存するところ
     @user = current_user.id
-    @room = Room.new(params.require(:room).permit(:name, :description, :price, :adress).merge(user_id: current_user.id))
-     binding.pry
+    @room = Room.new(params.require(:room).permit(:name, :description, :price, :adress,:image_room).merge(user_id: current_user.id))
+    #@room.image_room = "defolt_room_image.png"
+   
     if @room.save
      
       flash[:notice] = "お部屋を新規登録しました"
@@ -22,8 +24,9 @@ class RoomsController < ApplicationController
   end
 
   def show
+    
     @user = current_user
-    @rooms=Room.all
+    @room=Room.find(params[:id])
   end
 
   def edit

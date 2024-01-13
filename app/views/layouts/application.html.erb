@@ -13,18 +13,23 @@
   <body>
     <div class ="header">
       <div class="header_logo"><img src="/logo.png" alt="サイトロゴ" width="322" height="43"></div>
-      <ul class="header-menus">
-      <% if user_signed_in? %>
-
+        <ul class="header-menus">
+          <% if user_signed_in? %>
+            <% if current_user.image_name? %><p>
+              <%= image_tag current_user.image_name.url,size: '30x30' %>
+            <% else %>
+              <%= image_tag 'avatar.png', size: '30x30' %>
+            <% end %>
 
           <div class="dropdown">
-          <li onclick="toggleDropdown()"><%= current_user.name %></li>
-          <ul id="dropdownContent" class="dropdown-content">
+            <li onclick="toggleDropdown()"><%= current_user.name %></li>
+            <ul id="dropdownContent" class="dropdown-content">
             
+            <li><%= link_to("施設の新規登録","/rooms/new")%></li>
             <li><%= link_to("アカウント設定","/users/account")%></li>
             <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
            
-          </ul>
+            </ul>
         </div>
       <% else %>
         <li>

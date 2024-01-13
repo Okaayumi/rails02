@@ -1,23 +1,25 @@
-<% @rooms.each do |room| %>
+<%=link_to"戻る",:rooms %>
 <table>
+
+<%= image_tag 'defolt_room_image.png', size: '80x80' %>
 <tr>
   <th>施設名</th>
-  <td><%=room.name%></td>
+  <td><%=@room.name%></td>
 </tr>
 
 <tr>
   <th>施設詳細</th>
-  <td><%=room.description%></td>
+  <td><%=@room.description%></td>
 </tr>
 
 <tr>
   <th>料金</th>
-  <td><%=room.price%></td>
+  <td><%=@room.price%></td>
 </tr>
 
 <tr>
   <th>住所</th>
-  <td><%=room.adress%></td>
+  <td><%=@room.adress%></td>
 </tr>
 
 
@@ -25,8 +27,5 @@
 
 </table>
 
-<% if flash[:notice] %>
-<p class="notice"><%= flash[:notice] %></p>
-<% end %>
 
-<% end %>
+

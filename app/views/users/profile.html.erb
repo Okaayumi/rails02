@@ -7,8 +7,8 @@
 
 <div class="profile-image">
   
-  <p><strong>アカウント画像</strong><% if @image_name.present? %><p>
-    <%= image_tag @image_name, size: '80x80' %>
+  <p><strong>アカウント画像</strong><% if @user.image_name? %><p>
+  <%= image_tag @user.image_name.url %>
   <% else %>
     <%= image_tag 'avatar.png', size: '80x80' %>
   <% end %>
@@ -19,3 +19,4 @@
 
 <p><strong>自己紹介</strong> <%= @user.self_introduction%></p>
 <%= link_to "編集", edit_user_profile_path %>
+

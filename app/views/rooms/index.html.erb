@@ -1,2 +1,36 @@
-<h1>Rooms#index</h1>
-<p>Find me in app/views/rooms/index.html.erb</p>
+<div class="container RoomsContainer"> 
+  <p class="RoomsContainer_resulr">
+    <%= @rooms.count %>件見つかりました
+  </p>
+</div>
+
+<ul class="RoomList">
+  <% @rooms.each do |room| %>
+    <li class="Room">
+      <div class="RoomBodyWrapper">
+        <div class="profile-image">
+          <% if room.image_room? %>
+            <%= image_tag room.image_room.url, size: '80x80'%>
+          <% else %>
+            <%= image_tag 'defolt_room_image.png', size: '80x80' %>
+          <% end %>
+        </div>
+
+        <p><%= room.name %></p>
+        <p><%= room.adress %></p>
+        <p><%= room.description %></p>
+        <p><%= room.price %></p>
+
+        <%= link_to "詳細", room %>
+      </div>
+    </li>
+  <% end %>
+</ul>
+
+    
+ 
+    
+    
+   </div>
+   </li>
+</ul>
