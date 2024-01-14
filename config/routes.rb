@@ -14,6 +14,7 @@ devise_scope :user do
   get 'users/profile', to: 'users#profile', as: 'user_profile'
   get 'users/account', to: 'users#account', as: 'user_acount'
   put '/users/:id/update', to: 'users#update', as: 'update_user'
+  get 'rooms/own', to: 'rooms#own' ,as:'room_own'
 
 #newからdeleteまでのルーテイングを一括で作っているっぽい
   resource :reservations

@@ -27,6 +27,14 @@ class RoomsController < ApplicationController
     
     @user = current_user
     @room=Room.find(params[:id])
+    
+  end
+
+  def own
+    
+    @user = current_user
+    
+    @rooms=@user.rooms
   end
 
   def edit

@@ -1,36 +1,35 @@
-<div class="container RoomsContainer"> 
-  <p class="RoomsContainer_resulr">
-    <%= @rooms.count %>件見つかりました
-  </p>
-</div>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-<ul class="RoomList">
-  <% @rooms.each do |room| %>
-    <li class="Room">
-      <div class="RoomBodyWrapper">
-        <div class="profile-image">
-          <% if room.image_room? %>
-            <%= image_tag room.image_room.url, size: '80x80'%>
-          <% else %>
-            <%= image_tag 'defolt_room_image.png', size: '80x80' %>
-          <% end %>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+<div class="container-fluid">
+  <div class="row RoomList">
+    <% @rooms.each do |room| %>
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card Room">
+          <div class="RoomBodyWrapper">
+            <div class="profile-image">
+              <% if room.image_room? %>
+                <%= image_tag room.image_room.url, size: '80x80', class: 'card-img-top img-fluid' %>
+              <% else %>
+                <%= image_tag 'defolt_room_image.png', size: '80x80', class: 'card-img-top img-fluid' %>
+              <% end %>
+            </div>
+
+            <div class="card-body">
+              <h5 class="card-title"><%= room.name %></h5>
+              <p class="card-text"><%= room.adress %></p>
+              <p class="card-text"><%= room.description %></p>
+              <p class="card-text"><%= room.price %></p>
+              <%= link_to "詳細", room, class: 'btn btn-primary' %>
+            </div>
+          </div>
         </div>
-
-        <p><%= room.name %></p>
-        <p><%= room.adress %></p>
-        <p><%= room.description %></p>
-        <p><%= room.price %></p>
-
-        <%= link_to "詳細", room %>
       </div>
-    </li>
-  <% end %>
-</ul>
-
-    
- 
-    
-    
-   </div>
-   </li>
-</ul>
+    <% end %>
+  </div>
+</div>
