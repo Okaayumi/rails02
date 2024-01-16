@@ -1,31 +1,39 @@
-<%=link_to"戻る",:rooms %>
-<table>
-
-<%= image_tag 'defolt_room_image.png', size: '80x80' %>
-<tr>
-  <th>施設名</th>
-  <td><%=@room.name%></td>
-</tr>
-
-<tr>
-  <th>施設詳細</th>
-  <td><%=@room.description%></td>
-</tr>
-
-<tr>
-  <th>料金</th>
-  <td><%=@room.price%></td>
-</tr>
-
-<tr>
-  <th>住所</th>
-  <td><%=@room.adress%></td>
-</tr>
+<div class="container mt-4">
 
 
 
+  <div class="row">
+    <div class="col-md-4">
+    <%= link_to '前のページに戻る', @back_link %>
+      <% if @room.image_room? %>
+        <%= image_tag @room.image_room.url, size: '80x80', class: 'card-img-top img-fluid' %>
+      <% else %>
+        <%= image_tag 'defolt_room_image.png', size: '80x80', class: 'card-img-top img-fluid' %>
+      <% end %>
+      </div>
+    </div>
 
-</table>
-
+    <div class="col-md-8">
+      <table class="table">
+        <tr>
+          <th>施設名</th>
+          <td><%= @room.name %></td>
+        </tr>
+        <tr>
+          <th>施設詳細</th>
+          <td><%= @room.description %></td>
+        </tr>
+        <tr>
+          <th>料金</th>
+          <td><%= @room.price %></td>
+        </tr>
+        <tr>
+          <th>住所</th>
+          <td><%= @room.adress %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
 
 

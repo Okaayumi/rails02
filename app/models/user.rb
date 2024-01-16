@@ -9,3 +9,5 @@ class User < ApplicationRecord
 
   mount_uploader :image_name, ImageNameUploader
 end
+
+

@@ -6,6 +6,15 @@
   <br>
   旅をしよう
   </h2>
+
+  <div class="search-form">
+    <%= search_form_for @search, url: search_rooms_path do |f| %>
+      <%= f.label :adress_cont, 'エリア' %>
+      <%= f.search_field :adress_cont %>
+      <%= f.submit '検索' %>
+    <% end %>
+  </div>
+
 </div>
 
 <div class="Secoundview">
@@ -14,16 +23,16 @@
 </h2>
 
 <div class="recomend_areas">
-  <div class="recomend_area recomend_tokyo">
+  <div class="recomend_area recomend_tokyo" data-area="東京都">
     <h2 class="area">東京</h2>
   </div>
-  <div class="recomend_area recomend_osaka">
+  <div class="recomend_area recomend_osaka" data-area="大阪府">
   <h2 class="area">大阪</h2>
   </div>
-  <div class="recomend_area recomend_kyoto">
+  <div class="recomend_area recomend_kyoto" data-area="京都府">
   <h2 class="area">京都</h2>
   </div>
-  <div class="recomend_area recomend_sapporo">
+  <div class="recomend_area recomend_sapporo" data-area="札幌">
   <h2 class="area">札幌</h2>
   </div>
   

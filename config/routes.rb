@@ -19,7 +19,11 @@ devise_scope :user do
 #newからdeleteまでのルーテイングを一括で作っているっぽい
   resource :reservations
   resources :users
-  resources :rooms
+  resources :rooms do
+    collection do
+        get 'search'
+    end
+  end
   namespace :users do
     get 'users/edit', to: 'users#edit'
     put 'update', to: 'registrations#update'

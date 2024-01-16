@@ -61,4 +61,5 @@ gem 'devise'
 gem 'mini_magick'
 gem 'carrierwave'
 gem 'bootstrap-sass'
+gem 'ransack'
 

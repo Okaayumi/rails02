@@ -1,4 +1,5 @@
 class RoomsController < ApplicationController
+  
   def index
     @rooms=Room.all
   end
@@ -27,6 +28,7 @@ class RoomsController < ApplicationController
     
     @user = current_user
     @room=Room.find(params[:id])
+    @back_link = request.referer || root_path
     
   end
 
@@ -46,4 +48,6 @@ class RoomsController < ApplicationController
   def destroy
   end
 
+  
+  
 end
