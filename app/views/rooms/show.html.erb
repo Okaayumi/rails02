@@ -11,6 +11,31 @@
         <%= image_tag 'defolt_room_image.png', size: '80x80', class: 'card-img-top img-fluid' %>
       <% end %>
       </div>
+
+      <div class="reservation_block">
+        <h5>宿泊予約</h5>
+        <%= form_with model: @reservation, method: :post, url: reservations_confirm_path do |f| %>
+          <tr>
+            <th><%= f.label :start_date ,"チェックイン日" %></th>
+            <td><%= f.date_field :start_date %></td>
+          </tr>
+          <tr>
+            <th><%= f.label :finish_date ,"チェックイン日" %></th>
+            <td><%= f.date_field :finish_date %></td>
+          </tr>
+          <tr>
+            <th><%= f.label :number_of_people ,"人数" %></th>
+            <td><%= f.text_field :number_of_people %></td>
+          </tr>
+
+          <%= f.hidden_field :room_id, value: @room.id %>
+          <%= f.hidden_field :user_id, value: @user.id %>
+            <ul>
+              <li><%=f.submit "予約"%></li>
+            </ul>
+        <% end %>
+
+      </div>
     </div>
 
     <div class="col-md-8">
@@ -31,6 +56,8 @@
           <th>住所</th>
           <td><%= @room.adress %></td>
         </tr>
+
+
       </table>
     </div>
   </div>

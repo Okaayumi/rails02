@@ -28,7 +28,8 @@ class RoomsController < ApplicationController
     
     @user = current_user
     @room=Room.find(params[:id])
-    @back_link = request.referer || root_path
+    @reservation = Reservation.new
+
     
   end
 

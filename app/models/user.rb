@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   #has_one_attached :image_name
   has_many:rooms
+  has_many:reservations
 
   mount_uploader :image_name, ImageNameUploader
 end
