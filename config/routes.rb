@@ -21,7 +21,7 @@ devise_scope :user do
   post 'reservations/confirm'
 
 #newからdeleteまでのルーテイングを一括で作っているっぽい
-  resource :reservations
+  resources :reservations
   resources :users
   resources :rooms do
     collection do
