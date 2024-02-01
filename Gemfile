@@ -63,3 +63,6 @@ gem 'carrierwave'
 gem 'bootstrap-sass'
 gem 'ransack'
 
+gem 'devise-i18n'
+gem 'devise-i18n-views'
+

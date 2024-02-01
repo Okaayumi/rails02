@@ -20,7 +20,7 @@
             <td><%= f.date_field :start_date %></td>
           </tr>
           <tr>
-            <th><%= f.label :finish_date ,"チェックイン日" %></th>
+            <th><%= f.label :finish_date ,"チェックアウト日" %></th>
             <td><%= f.date_field :finish_date %></td>
           </tr>
           <tr>
@@ -50,7 +50,7 @@
         </tr>
         <tr>
           <th>料金</th>
-          <td><%= @room.price %></td>
+          <td><%= "¥" + @room.price.to_i.to_s %></td>
         </tr>
         <tr>
           <th>住所</th>

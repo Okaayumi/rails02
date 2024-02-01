@@ -6,61 +6,85 @@
   </div>
 
   <%= form_with model: @reservation, url: reservations_path, local: true do |f| %>
-    
-  <div class="row">
+
+    <div class="row">
     <div class="col">
       チェックイン
     </div>
     <div class="col">
-    <%= @reservation.start_date %>
+      <% if @reservation.start_date.present? %>
+        <%= @reservation.start_date.strftime("%Y/%m/%d") %>
+        <%= f.hidden_field :start_date %>
+      <% else %>
+        render "rooms/show"
+      <% end %>
     </div>
   </div>
 
+    <div class="row">
+      <div class="col">
+        <p>チェックアウト</p>
+      </div>
+      <div class="col">
+        <% if @reservation.finish_date.present? %> 
+          <%= @reservation.finish_date.strftime("%Y/%m/%d") %>
+          <%= f.hidden_field :finish_date %>
+          <% else %>
+          N/A
+        <% end %>
+      </div>
+    </div>
 
-  <div class="row">
-    <div class="col">
-      チェックアウト
+    <div class="row">
+      <div class="col">
+        <p>日数</p>
+      </div>
+      <div class="col">
+        <% if @reservation.start_date.present? && @reservation.finish_date.present?%>
+          <%= (@reservation.finish_date - @reservation.start_date).to_i %> 日
+        <% else %>
+          N/A
+        <% end %>
+      </div>
     </div>
-    <div class="col">
-    <%= @reservation.finish_date %>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col">
-    日数
+    <div class="row">
+      <div class="col">
+        <p>人数</p>
+      </div>
+      <div class="col">
+      <% if @reservation.number_of_people.present? %> 
+        <%= @reservation.number_of_people %>    
+        <%= f.hidden_field :number_of_people %> 
+        <% else %>
+        render "rooms/show"
+      <% end %>
+      </div>
     </div>
-    <%= (@reservation.finish_date - @reservation.start_date).to_i %> 日
-    <div class="col">
-      
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col">
-      人数
+    <div class="row">
+      <div class="col">
+        <p>お支払い金額</p>
+      </div>
+      <div class="col">
+      <% if @reservation.start_date.present? && @reservation.finish_date.present? && @reservation.number_of_people.present? %>
+        <%= @room.price * @reservation.number_of_people * (@reservation.finish_date - @reservation.start_date).to_i %> 円
+        <% else %>
+          N/A
+        <% end %> 
+      </div>
     </div>
-    <div class="col">
-    <%= @reservation.number_of_people %>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col">
-    お支払い金額
-    </div>
-    <div class="col">
-    <%= @room.price * @reservation.number_of_people * (@reservation.finish_date - @reservation.start_date).to_i %> 円
-    </div>
-  </div>
-  <p>上記の内容で正しければ「確定」ボタンを押してください</p>
-  <div>
-  <ul>
-    <li><%= f.submit "予約完了する"%></li>
-    <li><%= link_to "キャンセル", :rooms %></li>
-  </ul>
-</div>
+    <%= f.hidden_field :room_id %>
+    <%= f.hidden_field :user_id %>
 
+    <p>上記の内容で正しければ「確定」ボタンを押してください</p>
+    <div>
+      <ul>
+        <li><%= f.submit "予約完了する"%></li>
+        <li><%= link_to "キャンセル", :rooms %></li>
+      </ul>
+    </div>
   <% end %>
 </div>
 

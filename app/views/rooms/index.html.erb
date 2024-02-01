@@ -27,7 +27,7 @@
               <h5 class="card-title"><%= room.name %></h5>
               <p class="card-text"><%= room.adress %></p>
               <p class="card-text"><%= room.description %></p>
-              <p class="card-text"><%= room.price %></p>
+              <p class="card-text"><%="¥" + room.price.to_i.to_s %></p>
               <%= link_to "詳細", room, class: 'btn btn-primary' %>
             </div>
           </div>
