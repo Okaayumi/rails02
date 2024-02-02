@@ -14,16 +14,7 @@ class ReservationsController < ApplicationController
 
    @reservation = Reservation.new(params.require(:reservation).permit(:start_date, :finish_date, :number_of_people, :room_id, :user_id))
 
-   if @reservation.valid?
-     # バリデーションが成功した場合の処理
-     # 例: 予約が成功した旨のメッセージを表示し、予約完了画面にリダイレクトするなど
-     redirect_to reservations_path
-   else
-     # バリデーションが失敗した場合の処理
-     # 例: エラーメッセージを表示し、元の画面に戻るなど
-     flash.now[:alert] = "予約に失敗しました"
-     render "rooms/show"
-   end
+
   
    
 

@@ -16,7 +16,7 @@
         <%= @reservation.start_date.strftime("%Y/%m/%d") %>
         <%= f.hidden_field :start_date %>
       <% else %>
-        render "rooms/show"
+        N/A
       <% end %>
     </div>
   </div>
@@ -68,7 +68,7 @@
       </div>
       <div class="col">
       <% if @reservation.start_date.present? && @reservation.finish_date.present? && @reservation.number_of_people.present? %>
-        <%= @room.price * @reservation.number_of_people * (@reservation.finish_date - @reservation.start_date).to_i %> 円
+      <%= (@room.price * @reservation.number_of_people * (@reservation.finish_date - @reservation.start_date)).floor %> 円
         <% else %>
           N/A
         <% end %> 
