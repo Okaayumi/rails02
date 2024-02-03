@@ -14,7 +14,7 @@ class RoomsController < ApplicationController
     @room = Room.new(params.require(:room).permit(:name, :description, :price, :adress,:image_room).merge(user_id: current_user.id))
     #@room.image_room = "defolt_room_image.png"
 
-    @reservation = Reservation.new(start_date: params[:room][:start_date])
+    @reservation = Reservation.new(params[:room].slice(:start_date, :finish_date, :number_of_people))
    
     if @reservation.valid?
       # バリデーションが成功した場合の処理
