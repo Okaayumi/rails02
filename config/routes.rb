@@ -16,7 +16,7 @@ devise_scope :user do
   get 'users/account', to: 'users#account', as: 'user_acount'
   put '/users/:id/update', to: 'users#update', as: 'update_user'
   get 'rooms/own', to: 'rooms#own' ,as:'room_own'
-  get 'reservations/confirm' ,to: 'reservations#confirm'
+  #get 'reservations/confirm' ,to: 'reservations#confirm'
 
   post 'reservations/confirm'
 

@@ -10,33 +10,34 @@ class RoomsController < ApplicationController
   end
 
   def create #データベースに保存するところ
-    @user = current_user.id
+    @user = current_user
     @room = Room.new(params.require(:room).permit(:name, :description, :price, :adress,:image_room).merge(user_id: current_user.id))
     #@room.image_room = "defolt_room_image.png"
-
-    @reservation = Reservation.new(params[:room].slice(:start_date, :finish_date, :number_of_people))
    
-    if @reservation.valid?
-      # バリデーションが成功した場合の処理
-      # 例: 予約が成功した旨のメッセージを表示し、予約完了画面にリダイレクトするなど
-      redirect_to "reservations/confirm"
+    
+    #@reservation = Reservation.new(params[:room].slice(:start_date, :finish_date, :number_of_people))
+   
+    if @room.save
+     
+      flash[:notice] = "お部屋を新規登録しました"
+      redirect_to:rooms
     else
-      # バリデーションが失敗した場合の処理
-      # 例: エラーメッセージを表示し、元の画面に戻るなど
-      puts @reservation.errors.full_messages
-      flash.now[:alert] = "予約に失敗しました"
-      render "rooms/show"
+      flash[:notice] = "お部屋の登録に失敗しました"
+      render "new"
     end
   end
 
-  def show
+  
 
+  def show
+    
     @user = current_user
     @room=Room.find(params[:id])
     @reservation = Reservation.new
+    @back_link = request.referer if request.referer.present?
 
     
-    
+
   end
 
   def own

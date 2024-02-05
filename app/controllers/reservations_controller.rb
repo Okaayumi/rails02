@@ -7,12 +7,12 @@ class ReservationsController < ApplicationController
   
   
   def confirm
-    @reservation = Reservation.new(reservation_params)
-  
+    #@reservation = Reservation.new(reservation_params)
+    @reservation = Reservation.new(params.require(:reservation).permit(:start_date, :finish_date, :number_of_people, :room_id, :user_id))
     
    @room = Room.find(params[:reservation][:room_id])#reservationモデルに関するデータの中の、room_idが予約が行われるroomのidだから、これからひっぱている
    @user=User.find(params[:reservation][:user_id])
-   @reservation = Reservation.new(params.require(:reservation).permit(:start_date, :finish_date, :number_of_people, :room_id, :user_id))
+   
 
    unless @reservation.valid? 
     # バリデーションが失敗した場合の処理
@@ -21,14 +21,14 @@ class ReservationsController < ApplicationController
     flash.now[:alert] = "予約に失敗しました"
     render "rooms/show"
   end
-  
-   
+
+
 
   end
 
   def create
   
-    @room = Room.find(params[:reservation][:room_id])
+    @room = Room.find(params[:room_id])
    
     @reservation=Reservation.new(params.require(:reservation).permit(:start_date, :finish_date, :number_of_people, :user_id, :room_id))
     if @reservation.save
@@ -36,7 +36,7 @@ class ReservationsController < ApplicationController
       redirect_to reservations_path
     else
       flash[:notice] = "予約失敗"
-      render "confirm"
+      render "rooms/show"
     end
   end
 
