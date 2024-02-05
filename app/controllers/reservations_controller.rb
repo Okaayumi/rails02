@@ -26,9 +26,12 @@ class ReservationsController < ApplicationController
 
   end
 
+  def show
+    head :not_found
+  end 
   def create
   
-    @room = Room.find(params[:room_id])
+    @room = Room.find(params[:reservation][:room_id])
    
     @reservation=Reservation.new(params.require(:reservation).permit(:start_date, :finish_date, :number_of_people, :user_id, :room_id))
     if @reservation.save
@@ -41,7 +44,8 @@ class ReservationsController < ApplicationController
   end
 
 
-  
+
+
 
   private
   def reservation_params

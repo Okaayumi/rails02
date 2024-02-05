@@ -37,6 +37,7 @@
             <ul id="dropdownContent" class="dropdown-content">
               <li><%= link_to("施設の新規登録","/rooms/new") %></li>
               <li><%= link_to("登録済一覧","/rooms/own") %></li>
+              <li><%= link_to("予約一覧","/reservations/index") %></li>
               <li><%= link_to("アカウント設定","/users/account") %></li>
               <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
             </ul>

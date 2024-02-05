@@ -1,5 +1,5 @@
 
-<h2>登録済み一覧</h2>
+<h2>予約済み一覧</h2>
 
 <table class="table">
   <thead>
@@ -30,7 +30,7 @@
         <td><%= reservation.start_date.strftime("%Y/%m/%d") %></td>
         <td><%= reservation.finish_date.strftime("%Y/%m/%d") %></td>
         
-        <td><%= room.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+        <td><%= reservation.created_at.strftime("%Y/%m/%d %H:%M") %></td>
        <td class="dropdown">
         <button class="btn btn-Link dropdown-toggle" type="button" id="dropdownMenuButton<%= room.id %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <img alt="3点メニューアイコン" src="https://rails-02-sample.herokuapp.com/assets/icons/three-dot-menu-0c042cde96cc73e058e97d09a24944eb2914eb8c152d418dc6fc6964251fdaa2.svg" class="dropdown-image">
