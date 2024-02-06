@@ -59,7 +59,33 @@
   }
 
   function deleteItem(roomId) {
-    // 削除アクションのところ
-    console.log("お部屋を削除しました");
+    // 削除アクションのURLを生成
+    var deleteUrl = '<%= room_path(0) %>'; // 0は仮の値、実際の値は適切なものに変更
+
+    // roomIdを使って実際のURLに置き換え
+    deleteUrl = deleteUrl.replace("0", roomId);
+
+    // 削除リクエスト
+    fetch(deleteUrl, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': '<%= form_authenticity_token.to_s %>'
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Success:', data);
+      // 削除が成功したらリダイレクト
+      window.location.href = '<%= room_own_path %>';
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
   }
 </script>

@@ -18,6 +18,7 @@ devise_scope :user do
   get 'rooms/own', to: 'rooms#own' ,as:'room_own'
   get 'rooms/:id/edit', to: 'rooms#edit'
   post 'rooms/:id/update', to: 'rooms#update'
+  
   #get 'reservations/confirm' ,to: 'reservations#confirm'
 
   post 'reservations/confirm'

@@ -20,7 +20,7 @@ class RoomsController < ApplicationController
     if @room.save
      
       flash[:notice] = "お部屋を新規登録しました"
-      redirect_to:rooms
+      redirect_to room_path(@room)
     else
       flash[:notice] = "お部屋の登録に失敗しました"
       render "new"
@@ -63,6 +63,11 @@ class RoomsController < ApplicationController
   end
 
   def destroy
+    @room = Room.find(params[:id])
+    @room.destroy
+    flash[:notice] = "施設を削除しました"
+    redirect_to action: "own"
+   
   end
 
   
