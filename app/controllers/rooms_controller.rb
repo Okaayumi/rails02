@@ -48,9 +48,18 @@ class RoomsController < ApplicationController
   end
 
   def edit
+    @room=Room.find(params[:id])
   end
 
   def update
+    @room = Room.find(params[:id])
+    if @room.update(params.require(:room).permit(:name, :description, :price, :adress,:image_room))
+      flash[:notice] = "ユーザーIDが「#{@room.id}」の情報を更新しました"
+      redirect_to room_path(@room)
+      else
+      render "edit"
+      end
+
   end
 
   def destroy

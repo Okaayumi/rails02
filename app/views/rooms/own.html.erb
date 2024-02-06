@@ -48,12 +48,18 @@
 
 <script>
   function editItem(roomId) {
-    // 編集アクションのところ
-    console.log("更新する的なところ" );
+    // 編集アクションのURLを生成
+    var editUrl = '<%= edit_room_path(0) %>'; // 0は仮の値、実際の値は適切なものに変更
+
+    // roomIdを使って実際のURLに置き換え
+    editUrl = editUrl.replace("0", roomId);
+
+    // リダイレクト
+    window.location.href = editUrl;
   }
 
   function deleteItem(roomId) {
     // 削除アクションのところ
-    console.log("お部屋を削除しました" );
+    console.log("お部屋を削除しました");
   }
 </script>
