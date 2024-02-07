@@ -20,6 +20,7 @@ devise_scope :user do
   post 'rooms/:id/update', to: 'rooms#update'
   
   #get 'reservations/confirm' ,to: 'reservations#confirm'
+  get 'reservations/:id/edit', to: 'reservations#edit'
 
   post 'reservations/confirm'
 

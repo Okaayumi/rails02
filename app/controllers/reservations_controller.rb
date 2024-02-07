@@ -43,6 +43,33 @@ class ReservationsController < ApplicationController
     end
   end
 
+  def edit
+    @reservation = Reservation.find(params[:id])
+    @room = @reservation.room
+    @user=@reservation.user
+  end
+
+  def update
+    @reservation = Reservation.find(params[:id])
+    @room = @reservation.room
+    @user=@reservation.user
+    if @reservation.update(params.require(:reservation).permit(:start_date, :finish_date, :number_of_people, :user_id, :room_id))
+      flash[:notice] = "予約情報を更新しました"
+      redirect_to room_path(@reservation)
+    else
+      flash[:notice] = "予約情報を更新失敗しました"
+      render "reservations/edit"
+    end
+
+  end
+
+  def destroy
+    @reservation = Reservation.find(params[:id])
+    @reservation.destroy
+    flash[:notice] = "予約を削除しました"
+    redirect_to :reservations
+    end
+
 
 
 

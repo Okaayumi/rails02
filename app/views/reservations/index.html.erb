@@ -36,8 +36,9 @@
             <img alt="3点メニューアイコン" src="https://rails-02-sample.herokuapp.com/assets/icons/three-dot-menu-0c042cde96cc73e058e97d09a24944eb2914eb8c152d418dc6fc6964251fdaa2.svg" class="dropdown-image">
         </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton<%= room.id %>">
-            <a class="dropdown-item" href="#" onclick="editItem(<%= room.id %>)">編集</a>
-            <a class="dropdown-item" href="#" onclick="deleteItem(<%= room.id %>)">削除</a>
+          
+          <a class="dropdown-item" href="<%= edit_reservation_path(reservation) %>">編集</a>
+          <a class="dropdown-item" href="<%= reservation_path(reservation) %>" data-method="delete" data-confirm="本当に削除しますか？">削除</a>
           </div>
         </td>
         
