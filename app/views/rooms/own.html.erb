@@ -1,0 +1,91 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+
+
+
+<h2>登録済み一覧</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>画像</th>
+      <th>施設名</th>
+      <th>紹介文</th>
+      <th>料金</th>
+      <th>作成日</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @rooms.each do |room| %>
+      <tr>
+        <td>
+          <% if room.image_room? %>
+            <%= image_tag room.image_room.url, size: '80x80', class: 'dropdown-image' %>
+          <% else %>
+            <%= image_tag 'defolt_room_image.png', size: '80x80', class: 'dropdown-image' %>
+          <% end %>
+        </td>
+        <td><%= link_to room.name,room %></td>
+        <td><%= room.description %></td>
+        <td> ￥<%=room.price.to_i %></td>
+
+        <td><%= room.created_at.strftime("%Y/%m/%d") %></td>
+       <td class="dropdown">
+        <button class="btn btn-Link dropdown-toggle" type="button" id="dropdownMenuButton<%= room.id %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img alt="3点メニューアイコン" src="https://rails-02-sample.herokuapp.com/assets/icons/three-dot-menu-0c042cde96cc73e058e97d09a24944eb2914eb8c152d418dc6fc6964251fdaa2.svg" class="dropdown-image">
+        </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton<%= room.id %>">
+            <a class="dropdown-item" href="#" onclick="editItem(<%= room.id %>)">編集</a>
+            <a class="dropdown-item" href="#" onclick="deleteItem(<%= room.id %>)">削除</a>
+          </div>
+        </td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<script>
+  function editItem(roomId) {
+    // 編集アクションのURLを生成
+    var editUrl = '<%= edit_room_path(0) %>'; // 0は仮の値、実際の値は適切なものに変更
+
+    // roomIdを使って実際のURLに置き換え
+    editUrl = editUrl.replace("0", roomId);
+
+    // リダイレクト
+    window.location.href = editUrl;
+  }
+
+  function deleteItem(roomId) {
+    // 削除アクションのURLを生成
+    var deleteUrl = '<%= room_path(0) %>'; // 0は仮の値、実際の値は適切なものに変更
+
+    // roomIdを使って実際のURLに置き換え
+    deleteUrl = deleteUrl.replace("0", roomId);
+
+    // 削除リクエスト
+    fetch(deleteUrl, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': '<%= form_authenticity_token.to_s %>'
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Success:', data);
+      // 削除が成功したらリダイレクト
+      window.location.href = '<%= room_own_path %>';
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }
+</script>

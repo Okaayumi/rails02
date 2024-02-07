@@ -1,0 +1,48 @@
+
+<h2>予約済み一覧</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>画像</th>
+      <th>施設名</th>
+      <th>紹介文</th>
+      <th>合計料金</th>
+      <th>チェックイン</th>
+      <th>チェックアウト</th>
+      <th>予約確定日時</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @reservations.each do |reservation| %>
+      <tr>
+        <td>
+        <% room = reservation.room %>
+        <% if room.image_room? %>
+          <%= image_tag room.image_room.url, size: '80x80' %>
+        <% else %>
+          <%= image_tag 'defolt_room_image.png', size: '80x80' %>
+        <% end %>
+        </td>
+        <td><%= room.name %></td>
+        <td><%= room.description %>
+        <td><%= (room.price * reservation.number_of_people * (reservation.finish_date - reservation.start_date)).to_i %> 円</td>
+        <td><%= reservation.start_date.strftime("%Y/%m/%d") %></td>
+        <td><%= reservation.finish_date.strftime("%Y/%m/%d") %></td>
+        
+        <td><%= reservation.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+       <td class="dropdown">
+        <button class="btn btn-Link dropdown-toggle" type="button" id="dropdownMenuButton<%= room.id %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img alt="3点メニューアイコン" src="https://rails-02-sample.herokuapp.com/assets/icons/three-dot-menu-0c042cde96cc73e058e97d09a24944eb2914eb8c152d418dc6fc6964251fdaa2.svg" class="dropdown-image">
+        </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton<%= room.id %>">
+          
+          <a class="dropdown-item" href="<%= edit_reservation_path(reservation) %>">編集</a>
+          <a class="dropdown-item" href="<%= reservation_path(reservation) %>" data-method="delete" data-confirm="本当に削除しますか？">削除</a>
+          </div>
+        </td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>

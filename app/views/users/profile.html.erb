@@ -1,0 +1,22 @@
+<%= render "shared/account" %>
+
+
+
+
+<h1>プロフィール</h1>
+
+<div class="profile-image">
+  
+  <p><strong>アカウント画像</strong><% if @user.image_name? %><p>
+  <%= image_tag @user.image_name.url %>
+  <% else %>
+    <%= image_tag 'avatar.png', size: '80x80' %>
+  <% end %>
+</div>
+
+<p><strong>名前</strong> <%= @user.name %></p>
+
+
+<p><strong>自己紹介</strong> <%= @user.self_introduction%></p>
+<%= link_to "編集", edit_user_profile_path %>
+

@@ -1,0 +1,66 @@
+<div class="container mt-4">
+
+
+
+  <div class="row">
+    <div class="col-md-4">
+    <%= link_to '前のページに戻る', request.referer if request.referer.present? %>
+      <% if @room.image_room? %>
+        <%= image_tag @room.image_room.url, size: '80x80', class: 'card-img-top img-fluid' %>
+      <% else %>
+        <%= image_tag 'defolt_room_image.png', size: '80x80', class: 'card-img-top img-fluid' %>
+      <% end %>
+      </div>
+
+      <div class="reservation_block">
+        <h5>宿泊予約</h5>
+        <%= form_with model: @reservation, method: :post, url: reservations_confirm_path do |f| %>
+          <tr>
+            <th><%= f.label :start_date ,"チェックイン日" %></th>
+            <td><%= f.date_field :start_date %></td>
+          </tr>
+          <tr>
+            <th><%= f.label :finish_date ,"チェックアウト日" %></th>
+            <td><%= f.date_field :finish_date %></td>
+          </tr>
+          <tr>
+            <th><%= f.label :number_of_people ,"人数" %></th>
+            <td><%= f.text_field :number_of_people %></td>
+          </tr>
+
+          <%= f.hidden_field :room_id, value: @room.id %>
+          <%= f.hidden_field :user_id, value: @user.id %>
+            <ul>
+              <li><%=f.submit "予約"%></li>
+            </ul>
+        <% end %>
+
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <table class="table">
+        <tr>
+          <th>施設名</th>
+          <td><%= @room.name %></td>
+        </tr>
+        <tr>
+          <th>施設詳細</th>
+          <td><%= @room.description %></td>
+        </tr>
+        <tr>
+          <th>料金</th>
+          <td><%= "¥" + @room.price.to_i.to_s %></td>
+        </tr>
+        <tr>
+          <th>住所</th>
+          <td><%= @room.adress %></td>
+        </tr>
+
+
+      </table>
+    </div>
+  </div>
+</div>
+
+

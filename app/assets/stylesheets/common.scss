@@ -1,0 +1,27 @@
+.UserSection {
+    padding-top: 40px;
+   
+  }
+
+.Container {
+    max-width: 1440px;
+    padding: 0 32px;
+}
+
+#dropdownContent {
+  position: absolute;
+  top: 100%; 
+  left: 200;
+  display: none;
+  min-width: 160px; 
+  z-index: 1; 
+  white-space: nowrap; 
+  overflow: hidden; 
+  max-height: 300px; 
+  overflow-y: auto; 
+  right: 0; 
+}
+
+.dropdown.open #dropdownContent {
+  display: block;
+}

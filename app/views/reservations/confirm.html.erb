@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h3>予約確認</h3>
+    </div>
+  </div>
+
+  <%= form_with model: @reservation, url: reservations_path, local: true do |f| %>
+
+    <div class="row">
+    <div class="col">
+      チェックイン
+    </div>
+    <div class="col">
+      <% if @reservation.start_date.present? %>
+        <%= @reservation.start_date.strftime("%Y/%m/%d") %>
+        <%= f.hidden_field :start_date %>
+      <% else %>
+        N/A
+      <% end %>
+    </div>
+  </div>
+
+    <div class="row">
+      <div class="col">
+        <p>チェックアウト</p>
+      </div>
+      <div class="col">
+        <% if @reservation.finish_date.present? %> 
+          <%= @reservation.finish_date.strftime("%Y/%m/%d") %>
+          <%= f.hidden_field :finish_date %>
+          <% else %>
+          N/A
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <p>日数</p>
+      </div>
+      <div class="col">
+        <% if @reservation.start_date.present? && @reservation.finish_date.present?%>
+          <%= (@reservation.finish_date - @reservation.start_date).to_i %> 日
+        <% else %>
+          N/A
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <p>人数</p>
+      </div>
+      <div class="col">
+      <% if @reservation.number_of_people.present? %> 
+        <%= @reservation.number_of_people %>    
+        <%= f.hidden_field :number_of_people %> 
+        <% else %>
+        render "rooms/show"
+      <% end %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <p>お支払い金額</p>
+      </div>
+      <div class="col">
+      <% if @reservation.start_date.present? && @reservation.finish_date.present? && @reservation.number_of_people.present? %>
+      <%= (@room.price * @reservation.number_of_people * (@reservation.finish_date - @reservation.start_date)).floor %> 円
+        <% else %>
+          N/A
+        <% end %> 
+      </div>
+    </div>
+
+    <%= f.hidden_field :room_id %>
+    <%= f.hidden_field :user_id %>
+
+    <p>上記の内容で正しければ「確定」ボタンを押してください</p>
+    <div>
+      <ul>
+        <li><%= f.submit "予約完了する"%></li>
+        <li><%= link_to "キャンセル", :rooms %></li>
+      </ul>
+    </div>
+  <% end %>
+</div>
+

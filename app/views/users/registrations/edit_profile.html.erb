@@ -1,0 +1,38 @@
+<%= render 'shared/account' %>
+
+
+<div class="profile-image">
+<% if @user.image_name? %><p>
+<%= image_tag @user.image_name.url %>
+  <% else %>
+    <%= image_tag 'avatar.png', size: '80x80' %>
+  <% end %>
+</div>
+
+
+<%= form_with model: @user, url: edit_user_profile_path(@user), method: :patch, local: true, multipart: true do |f| %>
+  <!-- 既存のフォームフィールド -->
+
+  <!-- プロフィール画像のアップロードボタン -->
+  <div class="field">
+    <%= f.label :image_name, '画像のアップロード' %>
+    <%= f.file_field :image_name %>
+  </div>
+
+  <!--名前-->
+  <tr>
+  <h><%= f.label :name ,"名前" %></h>
+  <%= f.text_field :name %>
+</tr>
+
+  <!-- 自己紹介フィールド -->
+  <h><%= f.label :self_introduction ,"一言紹介" %></h>
+  <td><%= f.text_area :self_introduction %></td>
+
+  <%= f.submit '更新' %>
+  <a href="/users/profile" class="button">キャンセル</a>
+<% end %>
+
+
+
+

@@ -2,15 +2,85 @@
 <html>
   <head>
     <title>Hotelreserve</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   </head>
 
   <body>
+
+    <div class ="header">
+      <%= link_to root_path do %>
+      <div class="header_logo"><img src="/logo.png" alt="サイトロゴ" width="322" height="43"></div>
+      <% end %>
+      <!-- device移動予定 -->
+      <div class="message">
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+      </div>
+      <ul class="header-menus">
+        <% if user_signed_in? %>
+          <div class="dropdown" onclick="toggleDropdown(event)">
+            <li>
+              <% if current_user.image_name? %>
+                <%= image_tag current_user.image_name.url, size: '30x30' %>
+              <% else %>
+                <%= image_tag 'avatar.png', size: '30x30' %>
+              <% end %>
+              <%= current_user.name %>
+            </li>
+            <ul id="dropdownContent" class="dropdown-content">
+              <li><%= link_to("施設の新規登録","/rooms/new") %></li>
+              <li><%= link_to("登録済一覧","/rooms/own") %></li>
+              <li><%= link_to("予約一覧","/reservations/index") %></li>
+              <li><%= link_to("アカウント設定","/users/account") %></li>
+              <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+            </ul>
+          </div>
+        <% else %>
+          <li>
+            <%= link_to "ログイン", new_user_session_path %>
+          </li>
+          <li class="btn">
+            <%= link_to "新規登録", new_user_registration_path %>
+          </li>
+        <% end %>
+      </ul>
+
+    </div>
+
+
     <%= yield %>
+
+
+
+    <div class="footer">
+      <div class="footer_logo"><img src="/logo.png" alt="サイトロゴ" width="322" height="43"></div>
+
+      <script>
+        function toggleDropdown(event) {
+          var dropdownContent = document.getElementById("dropdownContent");
+          dropdownContent.style.display = (dropdownContent.style.display === 'block') ? 'none' : 'block';
+          event.stopPropagation();
+        }
+
+        // ドキュメント外をクリックした場合にドロップダウンを非表示にする
+        window.onclick = function(event) {
+          var dropdown = document.querySelector('.dropdown');
+          if (!event.target.matches('.dropdown li') && !event.target.matches('.dropdown-content')) {
+            var dropdownContent = document.getElementById("dropdownContent");
+            dropdownContent.style.display = 'none';
+          }
+        }
+      </script>
+    </div>
   </body>
 </html>
+
